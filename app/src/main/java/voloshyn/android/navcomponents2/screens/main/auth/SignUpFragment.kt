@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.textfield.TextInputLayout
 import voloshyn.android.navcomponents2.R
@@ -18,6 +19,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     private lateinit var binding: FragmentSignUpBinding
 
     private val viewModel by viewModelCreator { SignUpViewModel(Repositories.accountsRepository) }
+    private val args by navArgs<SignUpFragmentArgs>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -58,9 +60,10 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
         binding.progressBar.visibility = if (state.showProgress) View.VISIBLE else View.INVISIBLE
     }
 
-    private fun observeShowSuccessSignUpMessageEvent() = viewModel.showSuccessSignUpMessageEvent.observeEvent(viewLifecycleOwner) {
-        Toast.makeText(requireContext(), R.string.sign_up_success, Toast.LENGTH_LONG).show()
-    }
+    private fun observeShowSuccessSignUpMessageEvent() =
+        viewModel.showSuccessSignUpMessageEvent.observeEvent(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), R.string.sign_up_success, Toast.LENGTH_LONG).show()
+        }
 
     private fun fillError(input: TextInputLayout, @StringRes stringRes: Int) {
         if (stringRes == SignUpViewModel.NO_ERROR_MESSAGE) {
@@ -73,10 +76,11 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     }
 
     private fun observeGoBackEvent() = viewModel.goBackEvent.observeEvent(viewLifecycleOwner) {
-        TODO("Go back to the previous screen here")
+        findNavController().popBackStack()
     }
 
     private fun getEmailArgument(): String? {
-        TODO("Extract email value from arguments here")
+        val email = args.email
+        return email
     }
 }

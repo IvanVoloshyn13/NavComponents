@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import voloshyn.android.navcomponents2.R
 import voloshyn.android.navcomponents2.Repositories
 import voloshyn.android.navcomponents2.databinding.FragmentSignInBinding
@@ -66,7 +68,14 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
 
     private fun observeNavigateToTabsEvent() {
         viewModel.navigateToTabsEvent.observeEvent(viewLifecycleOwner) {
-            TODO("Replace SignInFragment by TabsFragment here")
+            findNavController().navigate(
+                R.id.action_signInFragment_to_tabsFragment,
+                null,
+                navOptions {
+                    popUpTo(R.id.signInFragment) {
+                        inclusive = true
+                    }
+                })
         }
     }
 
@@ -74,7 +83,7 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
         val email = binding.emailEditText.text.toString()
         val emailArg = email.ifBlank { null }
 
-        // user want to create a new account
-        TODO("Launch SignUpFragment here and send emailArg to it")
+        val direction = SignInFragmentDirections.actionSignInFragmentToSignUpFragment(email)
+        findNavController().navigate(direction)
     }
 }

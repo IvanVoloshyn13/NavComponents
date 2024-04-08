@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import voloshyn.android.navcomponents2.R
 import voloshyn.android.navcomponents2.Repositories
 import voloshyn.android.navcomponents2.databinding.FragmentEditProfileBinding
@@ -44,19 +45,21 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         }
     }
 
-    private fun listenInitialUsernameEvent() = viewModel.initialUsernameEvent.observeEvent(viewLifecycleOwner) { username ->
-        binding.usernameEditText.setText(username)
-    }
+    private fun listenInitialUsernameEvent() =
+        viewModel.initialUsernameEvent.observeEvent(viewLifecycleOwner) { username ->
+            binding.usernameEditText.setText(username)
+        }
 
-    private fun observeEmptyFieldErrorEvent() = viewModel.showEmptyFieldErrorEvent.observeEvent(viewLifecycleOwner) {
-        Toast.makeText(requireContext(), R.string.field_is_empty, Toast.LENGTH_SHORT).show()
-    }
+    private fun observeEmptyFieldErrorEvent() =
+        viewModel.showEmptyFieldErrorEvent.observeEvent(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), R.string.field_is_empty, Toast.LENGTH_SHORT).show()
+        }
 
     private fun onCancelButtonPressed() {
-        TODO("Go back to the previous screen here")
+        findNavController().popBackStack()
     }
 
     private fun observeGoBackEvent() = viewModel.goBackEvent.observeEvent(viewLifecycleOwner) {
-        TODO("Go back to the previous screen here")
+        findNavController().popBackStack()
     }
 }

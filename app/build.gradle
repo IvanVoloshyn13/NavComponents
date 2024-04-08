@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    // todo: add safe-args plugin here: androidx.navigation.safeargs.kotlin
     id 'androidx.navigation.safeargs.kotlin'
 }
 
@@ -48,10 +47,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
-
-    // todo: add nav component libraries here:
-    //       1) 'androidx.navigation:navigation-fragment-ktx'
-    //       2) 'androidx.navigation:navigation-ui-ktx'
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 }

@@ -1,9 +1,9 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    // todo: define version of nav component library here (at least '2.4.0-alpha10')
     ext.nav_version = "2.7.7"
+    ext.kotlin_version = "1.5.20"
     dependencies {
-        // todo: include dependency for safe-args plugin here: androidx.navigation:navigation-safe-args-gradle-plugin
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
     }
 }

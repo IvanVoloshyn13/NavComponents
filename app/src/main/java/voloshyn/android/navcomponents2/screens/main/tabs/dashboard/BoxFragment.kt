@@ -3,6 +3,8 @@ package voloshyn.android.navcomponents2.screens.main.tabs.dashboard
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import voloshyn.android.navcomponents2.R
 import voloshyn.android.navcomponents2.Repositories
 import voloshyn.android.navcomponents2.databinding.FragmentBoxBinding
@@ -13,6 +15,7 @@ import voloshyn.android.navcomponents2.views.DashboardItemView
 class BoxFragment : Fragment(R.layout.fragment_box) {
 
     private lateinit var binding: FragmentBoxBinding
+    private val args by navArgs<BoxFragmentArgs>()
 
     private val viewModel by viewModelCreator {
         BoxViewModel(
@@ -34,26 +37,26 @@ class BoxFragment : Fragment(R.layout.fragment_box) {
     }
 
     private fun onGoBackButtonPressed() {
-        TODO("Go back to the previous screen here")
+        findNavController().popBackStack()
     }
 
     private fun listenShouldExitEvent() =
         viewModel.shouldExitEvent.observeEvent(viewLifecycleOwner) { shouldExit ->
             if (shouldExit) {
                 // close the screen if the box has been deactivated
-                TODO("Go back to the previous screen here")
+                findNavController().popBackStack()
             }
         }
 
     private fun getBoxId(): Int {
-        TODO("Extract box id from arguments here")
+        return args.boxId
     }
 
     private fun getColorValue(): Int {
-        TODO("Extract color value from arguments here")
+        return args.colorValue
     }
 
     private fun getColorName(): String {
-        TODO("Extract color name from arguments here")
+        return args.colorName
     }
 }

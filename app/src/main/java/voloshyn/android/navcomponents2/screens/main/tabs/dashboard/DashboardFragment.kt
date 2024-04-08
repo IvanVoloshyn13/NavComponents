@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import voloshyn.android.navcomponents2.R
 import voloshyn.android.navcomponents2.Repositories
 import voloshyn.android.navcomponents2.databinding.FragmentDashboardBinding
@@ -11,7 +12,7 @@ import voloshyn.android.navcomponents2.model.boxes.entities.Box
 import voloshyn.android.navcomponents2.utils.viewModelCreator
 import voloshyn.android.navcomponents2.views.DashboardItemView
 
-class DashBoardFragment : Fragment(R.layout.fragment_dashboard) {
+class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
 
     private val viewModel by viewModelCreator { DashboardViewModel(Repositories.boxesRepository) }
 
@@ -63,8 +64,12 @@ class DashBoardFragment : Fragment(R.layout.fragment_dashboard) {
 
     private val boxClickListener = View.OnClickListener {
         val box = it.tag as Box
-        TODO("Launch BoxFragment and send box.id, box.colorValue and color name as it's arguments. " +
-                "BoxFragment should be placed inside the current tab (tabs should be available from BoxFragment)")
+        val direction = DashboardFragmentDirections.actionDashboardFragmentToBoxFragment(
+            boxId = box.id,
+            colorName = getString(box.colorNameRes),
+            colorValue = box.colorValue
+        )
+        findNavController().navigate(direction)
     }
 
 }
