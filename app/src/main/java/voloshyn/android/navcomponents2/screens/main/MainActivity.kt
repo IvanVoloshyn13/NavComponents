@@ -9,6 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import voloshyn.android.navcomponents2.R
 import voloshyn.android.navcomponents2.Repositories
 import voloshyn.android.navcomponents2.databinding.ActivityMainBinding
@@ -20,6 +21,7 @@ import java.util.regex.Pattern
  * Container for all screens in the app.
  */
 class MainActivity : AppCompatActivity() {
+    val ui = NavigationUI
 
     // view-model is used for observing username to be displayed in the toolbar
     private val viewModel by viewModelCreator { MainActivityViewModel(Repositories.accountsRepository) }
@@ -146,11 +148,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getMainNavigationGraphId(): Int {
-      return R.navigation.main_graph
+        return R.navigation.main_graph
     }
 
     private fun getTabsDestination(): Int {
-      return R.id.tabsFragment
+        return R.id.tabsFragment
     }
 
     private fun getSignInDestination(): Int {

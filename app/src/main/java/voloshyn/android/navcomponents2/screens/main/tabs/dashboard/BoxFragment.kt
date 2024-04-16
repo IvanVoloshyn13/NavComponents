@@ -48,7 +48,7 @@ class BoxFragment : Fragment(R.layout.fragment_box) {
             }
         }
 
-    private fun getBoxId(): Int {
+    private fun getBoxId(): Long {
         return args.boxId
     }
 

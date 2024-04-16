@@ -10,7 +10,7 @@ import voloshyn.android.navcomponents2.utils.publishEvent
 import voloshyn.android.navcomponents2.utils.share
 
 class BoxViewModel(
-    private val boxId: Int,
+    private val boxId: Long,
     private val boxesRepository: BoxesRepository
 ) : ViewModel() {
 
